@@ -65,6 +65,35 @@ func main() {
 
 <hr>
 
+# Table of contents
+- [RPC interaction](#rpc-interaction)
+  - [Client](#client)
+  - [Send](#send)
+  - [Receive](#receive)
+  - [Receive All](#receive-all)
+  - [Change Representative](#change-representative)
+  - [RPC](#rpc)
+  - [Get Account Balance](#get-account-balance)
+  - [Get Account Info](#get-account-info)
+  - [Get Account History](#get-account-history)
+  - [Get Receivable](#get-receivable)
+  - [Get Representatives](#get-representatives)
+  - [Generate Work](#generate-work)
+  - [Process](#process)
+- [Block creation and signing](#block-creation-and-signing)
+  - [Block](#block)
+  - [Sign](#sign)
+  - [Add Work](#add-work)
+- [Conversion](#conversion)
+  - [Seed To Private Key](#seed-to-private-key)
+  - [Private Key To Public Key](#private-key-to-public-key)
+  - [Public Key To Address](#public-key-to-address)
+  - [Address To Public Key](#address-to-public-key)
+  - [Nano To Raw](#nano-to-raw)
+  - [Raw To Nano](#raw-to-nano)
+- [Validation](#validation)
+  - [Address Is Valid](#address-is-valid)
+
 # RPC interaction
 ## Client
 The `Client` struct is used to interact with the Nano blockchain. It contains the URL of the RPC server, the authorization header and the authorization token.
@@ -124,7 +153,7 @@ The `GetAccountHistory` function gets the history of an account. It requires the
 history, err := client.GetAccountHistory(address, count)
 ```
 
-## Get Recievable
+## Get Receivable
 The `GetReceivable` function gets the receivable blocks of an account. It requires the address. It returns the receivable blocks or an error.
 ```go
 receivable, err := client.GetReceivable(address)
