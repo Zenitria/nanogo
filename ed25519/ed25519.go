@@ -1,6 +1,8 @@
 package ed25519
 
 import (
+	"crypto/rand"
+	"errors"
 	"filippo.io/edwards25519"
 	"golang.org/x/crypto/blake2b"
 )
@@ -25,8 +27,23 @@ func Sign(pubKey, privKey [32]byte, msg []byte) ([]byte, error) {
 		return nil, err
 	}
 
+	var randomH [32]byte
+	bytesRead, err := rand.Read(randomH[:])
+
+	if err != nil {
+		return nil, err
+	}
+
+	if bytesRead != 32 {
+		return nil, errors.New("failed to generate random hash value")
+	}
+
+	emptyBlockPadding := [blake2b.BlockSize - 64]byte{0}
+
 	h.Reset()
 	h.Write(dig[32:])
+	h.Write(randomH[:])
+	h.Write(emptyBlockPadding[:])
 	h.Write(msg)
 	h.Sum(msgDig[:0])
 
